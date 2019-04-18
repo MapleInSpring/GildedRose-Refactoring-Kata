@@ -1,17 +1,19 @@
 package com.gildedrose
 
-import org.junit.Assert.*
+import org.amshove.kluent.`should be equal to`
+import org.amshove.kluent.`should be greater or equal to`
 import org.junit.Test
 
 class GildedRoseTest {
 
-    @Test fun sellinDecreases_normalItems() {
+    @Test
+    fun sellinDecreases_normalItems() {
         val items = arrayOf(Item("foo", 10, 0))
         val app = GildedRose(items)
 
         app.updateQuality()
 
-        assertEquals(9, app.items[0].sellIn)
+        app.items[0].sellIn `should be equal to` 9
     }
 
     @Test
@@ -21,7 +23,7 @@ class GildedRoseTest {
 
         app.updateQuality()
 
-        assertEquals(19, app.items[0].quality)
+        app.items[0].quality `should be equal to` 19
     }
 
     @Test
@@ -31,7 +33,7 @@ class GildedRoseTest {
 
         app.updateQuality()
 
-        assertEquals(8, app.items[0].quality)
+        app.items[0].quality `should be equal to` 8
     }
 
     @Test
@@ -42,7 +44,7 @@ class GildedRoseTest {
         app.updateQuality()
 
 
-        assertEquals(0, app.items[0].quality)
+        app.items[0].quality `should be greater or equal to` 0
     }
 }
 
