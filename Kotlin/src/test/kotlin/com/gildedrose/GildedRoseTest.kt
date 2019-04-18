@@ -8,43 +8,46 @@ class GildedRoseTest {
 
     @Test
     fun sellinDecreases_normalItems() {
-        val items = arrayOf(Item("foo", 10, 0))
-        val app = GildedRose(items)
+        val item = Item("foo", 10, 0)
 
-        app.updateQuality()
+        val updatedItem = getUpdatedItem(item)
 
-        app.items[0].sellIn `should be equal to` 9
+        updatedItem.sellIn `should be equal to` 9
     }
 
     @Test
     fun qualityDecreases_normalItems() {
-        val items = arrayOf(Item("foo", 10, 20))
-        val app = GildedRose(items)
+        val item = Item("foo", 10, 20)
 
-        app.updateQuality()
+        val updatedItem = getUpdatedItem(item)
 
-        app.items[0].quality `should be equal to` 19
+        updatedItem.quality `should be equal to` 19
     }
 
     @Test
     fun qualityDecreasesTwiceAsFastAfterSellInDatePassed_normalItems() {
-        val items = arrayOf(Item("foo", 0, 10))
-        val app = GildedRose(items)
+        val item = Item("foo", 0, 10)
 
-        app.updateQuality()
+        val updatedItem = getUpdatedItem(item)
 
-        app.items[0].quality `should be equal to` 8
+        updatedItem.quality `should be equal to` 8
     }
 
     @Test
     fun qualityIsNeverNegative() {
-        val items = arrayOf(Item("foo", 10, 0))
-        val app = GildedRose(items)
+        val item = Item("foo", 10, 0)
 
+        val updatedItem = getUpdatedItem(item)
+
+        updatedItem.quality `should be greater or equal to` 0
+    }
+
+    private fun getUpdatedItem(item: Item): Item {
+
+        val app = GildedRose(arrayOf(item))
         app.updateQuality()
 
-
-        app.items[0].quality `should be greater or equal to` 0
+        return app.items[0]
     }
 }
 
